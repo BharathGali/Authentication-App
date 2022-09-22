@@ -20,12 +20,27 @@ def register():
         uname = request.form["[--uname--]"]
         uemail = request.form["[--email--]"]
         password = request.form["[--pass--]"]
-        if(len(list(db.users.find({"email":uemail}))) > 0):
+        if(len(list(db.user.find({"email":uemail}))) > 0):
             flash("User Already Exists")
             return render_template("register.html")
         else:
-            db.users.insert_one({"username":uname, "email":uemail, "password":password})
+            db.user.insert_one({"username":uname, "email":uemail, "password":password})
             return redirect(url_for('[--dashboard--]'))    
+
+
+@app.route("/login", methods = ['GET', 'POST'])
+def validate():
+    if request.method == 'POST':
+        uemail = request.form["[--email--]"]
+        password = request.form["[--pass--]"]
+        df = db.user.find_one({"email":uemail,"password":password})
+        if df is not None:
+            return redirect(url_for('[--dashboard--]'))
+        else :
+            flash("User Not Found")
+            return redirect(url_for('login'))
+    return redirect(url_for('login'))
+
 
 @app.route("/")
 def index():
