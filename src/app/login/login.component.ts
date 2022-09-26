@@ -10,6 +10,8 @@ import { ApiServiceService } from '../api-service.service';
 export class LoginComponent implements OnInit {
   email: any;
   pass: any;
+  loginFailed: boolean = false;
+
   constructor(private router: Router, private currentRoute: ActivatedRoute, private service: ApiServiceService) { }
 
   ngOnInit(): void {
@@ -29,8 +31,11 @@ export class LoginComponent implements OnInit {
         console.log("success")
       }else{
         console.log("error");
+        this.loginFailed = true;
       }
       
+    }, _error => {
+      this.loginFailed = true;
     })
     
   }
