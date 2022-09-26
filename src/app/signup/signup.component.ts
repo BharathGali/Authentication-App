@@ -18,7 +18,7 @@ export class SignupComponent implements OnInit {
   }
 
   goToLogin(): void{
-    this.route.navigate(['/login'])
+    this.route.navigate(['/login']);
   }
 
   signUpUser(): void{
@@ -28,7 +28,8 @@ export class SignupComponent implements OnInit {
       formData.append("email", this.email);
       this.service.registerUser(formData).subscribe(response =>{
         if(response == "OK"){
-          console.log("success")
+          console.log("success");
+          this.route.navigate(['/login']);
         }else{
           console.log("error");
         }

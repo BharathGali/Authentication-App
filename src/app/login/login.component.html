@@ -8,6 +8,7 @@
       <div class="main-container">
         <div class="login-container">
           <form class="validate-form login-form">
+            <span *ngIf="loginFailed" style="color: brown;">Login failed - email/password is incorrect</span>
             <span class="form-title">Welcome</span>
             <!-- <div
               class="wrap-input100 validate-input"
