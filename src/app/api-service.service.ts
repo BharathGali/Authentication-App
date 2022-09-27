@@ -11,6 +11,8 @@ export class ApiServiceService {
   register_url = "http://127.0.0.1:5000/register"
   profile_url = "http://127.0.0.1:5000/profile"
   delete_url = "http://127.0.0.1:5000/delete"
+  update_url = "http://127.0.0.1:5000/update"
+  logout_url = "http://127.0.0.1:5000/logout"
   constructor(private http: HttpClient ) { }
 
   loginUser(data: any): Observable<any> {
@@ -27,5 +29,13 @@ export class ApiServiceService {
 
   deleteUser(email: any): Observable<any> {
     return this.http.post(this.delete_url, email,{ responseType: 'text' });
+  }
+
+  updateuser(data: any): Observable<any> {
+    return this.http.post(this.update_url, data, {responseType: 'text'});
+  }
+
+  logoutUser(): Observable<any> {
+    return this.http.get(this.logout_url);
   }
 }

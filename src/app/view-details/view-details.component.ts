@@ -14,6 +14,7 @@ export class ViewDetailsComponent implements OnInit {
   phone: any;
   password: any;
   fullName: any;
+  bio: any;
 
   constructor(private route: Router,private service: ApiServiceService) { }
 
@@ -50,11 +51,17 @@ export class ViewDetailsComponent implements OnInit {
   }
 
   signoutUser(): void {
-
+    this.service.logoutUser().subscribe();
   }
 
   updateUser(): void {
-
+    var formData: any =new FormData();
+    formData.append("email",this.email);
+    formData.append("pass",this.password);
+    formData.append("name", this.fullName);
+    formData.append("phone", this.phone);
+    formData.append("bio", this.bio);
+    this.service.updateuser(formData).subscribe();
   }
 
   deleteUser(): void {
