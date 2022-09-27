@@ -1,11 +1,10 @@
-<p>view-details works!</p>
 <!DOCTYPE html>
 <html>
 
 <head>
     <style>
         body {
-            background-image: url("background.jpg");
+            /* background-image: url("background.jpg"); */
             max-width: 500px;
             margin: Auto;
             background-size: cover;
@@ -22,20 +21,17 @@
         <meta charset="utf-8">
         <title>Profile Page</title>
 
-        <label for="fname">First name:</label>
-        <input type="text" id="fname" name="fname" [(ngModel)]="firstname" value="John" align="left"><br><br>
+        <label for="fname">Full name:</label>
+        <input type="text" id="fname" name="fname" [(ngModel)]="fullName" value="John" align="left"><br><br>
         
-
-        <label for="lname">Last name:</label>
-        <input type="text" id="lname" name="lname" [(ngModel)]="lastname" value="Anitha"><br><br>
         
         <label for="email">Email:</label>
-        <input type="email" id="lname" name="lname" [(ngModel)]="emailid" value="Johnanitha@gmail.com"><br><br>
+        <input type="email" id="lname" name="email" [(ngModel)]="email" value="Johnanitha@gmail.com"><br><br>
         
         <label for="phone">Phone no:</label>
         <input type="tel" id="phone" name="phone" [(ngModel)]="phone" pattern="[0-9]{10}" required><br><br>
         <label for="pass">Password:</label>
-        <input type="password" id="pass" name="password" [(ngModel)]="passwrd" minlength="8" required> <br><br>
+        <input type="password" id="pass" name="password" [(ngModel)]="password" minlength="8" required> <br><br>
 
         <div class="upload">
 
@@ -45,9 +41,11 @@
                 <div class="buttons">
                     <div class="action_btn">
                         <button name="submit" class="action_btn submit" value="Submit"
-                            (click)="updateuser()">Submit</button>
+                            (click)="updateUser()">Submit</button>
                         <button name="Signout" class="action_btn Signout" type="submit" value="Signout"
-                            (click)="()">Sign Out</button>
+                            (click)="signoutUser()">Sign Out</button>
+                            <button name="Signout" class="action_btn Signout" type="submit" value="Signout"
+                            (click)="deleteUser()">Delete User</button>
 
                         <p id="saved"></p>
 

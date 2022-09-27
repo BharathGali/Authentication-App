@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
 import { ApiServiceService } from '../api-service.service';
 
 @Component({
@@ -12,7 +13,11 @@ export class LoginComponent implements OnInit {
   pass: any;
   loginFailed: boolean = false;
 
-  constructor(private router: Router, private currentRoute: ActivatedRoute, private service: ApiServiceService) { }
+  constructor(
+    private router: Router,
+    private currentRoute: ActivatedRoute,
+    private service: ApiServiceService,
+    private socialAuthService: SocialAuthService) { }
 
   ngOnInit(): void {
   }
@@ -26,18 +31,25 @@ export class LoginComponent implements OnInit {
     var formData: any = new FormData();
     formData.append("pass", this.pass);
     formData.append("email", this.email);
-    this.service.loginUser(formData).subscribe(response=>{
-      if(response == "OK"){
-        console.log("success")
-      }else{
+    this.service.loginUser(formData).subscribe(response => {
+      if (response == "ok") {
+        console.log("success");
+        localStorage.setItem("email",this.email);
+        this.router.navigate(['details']);
+        this.loginFailed = false;
+      } else {
         console.log("error");
         this.loginFailed = true;
       }
-      
+
     }, _error => {
       this.loginFailed = true;
     })
-    
+
+  }
+
+  loginWithGoogle(): void {
+    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
   }
 
 }
