@@ -52,6 +52,7 @@ export class ViewDetailsComponent implements OnInit {
 
   signoutUser(): void {
     this.service.logoutUser().subscribe();
+    this.route.navigate(['login']);
   }
 
   updateUser(): void {

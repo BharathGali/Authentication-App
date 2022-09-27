@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
+// import { GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
 import { ApiServiceService } from '../api-service.service';
 
 @Component({
@@ -16,8 +16,10 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private currentRoute: ActivatedRoute,
-    private service: ApiServiceService,
-    private socialAuthService: SocialAuthService) { }
+    private service: ApiServiceService
+    // private socialAuthService: SocialAuthService
+    )
+    { }
 
   ngOnInit(): void {
   }
@@ -49,7 +51,7 @@ export class LoginComponent implements OnInit {
   }
 
   loginWithGoogle(): void {
-    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
+    // this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
   }
 
 }

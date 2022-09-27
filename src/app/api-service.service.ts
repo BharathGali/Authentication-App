@@ -36,6 +36,6 @@ export class ApiServiceService {
   }
 
   logoutUser(): Observable<any> {
-    return this.http.get(this.logout_url);
+    return this.http.get(this.logout_url,{ responseType: 'text' });
   }
 }
