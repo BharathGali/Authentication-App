@@ -10,11 +10,16 @@ import { ApiServiceService } from '../api-service.service';
 export class ViewDetailsComponent implements OnInit {
 
   displayedImage: any;
-  emailid: any;
+  email: any;
+  phone: any;
+  password: any;
+  fullName: any;
 
   constructor(private route: Router,private service: ApiServiceService) { }
 
   ngOnInit(): void {
+    this.email = localStorage.getItem("email");
+    this.viewDetailsPage();
   }
   
   viewDetails(event: { target: { files: (Blob | MediaSource)[]; }; }): void{
@@ -25,12 +30,39 @@ export class ViewDetailsComponent implements OnInit {
 
   viewDetailsPage(): void{
     var formData: any =new FormData();
-    formData.append("email",this.emailid);
+    formData.append("email",this.email);
     this.service.getUserDetails(formData).subscribe(response =>{
+      console.log(response);
+      this.fullName = response.username;
+      this.phone = response.phone;
+      this.password = response.password;
       if(response == "OK"){
         console.log("success");
-      }else{
-        console.log("error");
+      }
+      // else{
+      //   console.log("error");
+      //   this.route.navigate(['login']);
+      // }
+      console.log(response.name);
+    }, _error => {
+      this.route.navigate(['login']);
+    });
+  }
+
+  signoutUser(): void {
+
+  }
+
+  updateUser(): void {
+
+  }
+
+  deleteUser(): void {
+    var formData: any =new FormData();
+    formData.append("email",this.email);
+    this.service.deleteUser(formData).subscribe(response => {
+      if(response == "OK"){
+        this.route.navigate(['login']);
       }
     });
   }
